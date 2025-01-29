@@ -13,8 +13,8 @@
 class UniquePointer
 {
     public:
-        explicit UniquePointer() = default;
-        explicit UniquePointer(IObject* object);
+        UniquePointer() = default;
+        UniquePointer(IObject* object);
         UniquePointer(UniquePointer& _) = delete;
         ~UniquePointer() { delete this->_object; }
 
