@@ -8,7 +8,9 @@
 #include <iostream>
 
 #include "DirectoryLister.hpp"
+#include "List.hpp"
 #include "SafeDirectoryLister.hpp"
+#include "SharedPointer.hpp"
 #include "UniquePointer.hpp"
 
 void myLs(const std::string& directory)
@@ -57,7 +59,7 @@ int main_ex00()
     return 0;
 }
 
-int main_ex03()
+int main_ex02()
 {
     UniquePointer ptr1;
     UniquePointer ptr2(new TestObject("Eccleston"));
@@ -77,9 +79,57 @@ int main_ex03()
     return 0;
 }
 
+void touch(IObject* object)
+{
+    if (object != nullptr)
+        object->touch();
+}
+
+int main_ex03()
+{
+    try
+    {
+        List list;
+        list.pushBack(new TestObject("Kermit"));
+        list.pushBack(new TestObject("Miss Piggy"));
+        list.pushFront(nullptr);
+        list.front() = new TestObject("Fozzie");
+        list.pushBack(nullptr);
+        list.forEach(touch);
+        list.clear();
+        list.popBack();
+        list.pushFront(new TestObject("Gonzo"));
+    }
+    catch (const List::InvalidOperationException& e)
+    {
+        std::cout << "Invalid operation on a list" << std::endl;
+    }
+    return 0;
+}
+
+int main_ex04()
+{
+    SharedPointer ptr1;
+    SharedPointer ptr2(new TestObject("O'Neill"));
+    SharedPointer ptr3(ptr2);
+    ptr1 = ptr3;
+    ptr2->touch();
+    std::cout << ptr1.use_count() << std::endl;
+    ptr1.reset(new TestObject("Carter"));
+    std::cout << ptr1.use_count() << std::endl;
+    ptr3.swap(ptr1);
+    (*ptr3).touch();
+    ptr1.reset();
+    std::cout << ptr1.use_count() << std::endl;
+    ptr2 = new TestObject(" Jackson ");
+    return 0;
+}
+
 int main()
 {
     //return main_ex00();
     //return main_ex01();
-    return main_ex03();
+    //return main_ex02();
+    //return main_ex03();
+    return main_ex04();
 }
