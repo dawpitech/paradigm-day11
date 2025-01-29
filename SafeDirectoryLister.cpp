@@ -21,7 +21,10 @@ bool SafeDirectoryLister::open(const std::string& path, const bool hidden)
 {
     if (this->_dir != nullptr && closedir(this->_dir) == -1) { perror(nullptr); }
     DIR* dir = opendir(path.c_str());
-    if (dir == nullptr) { throw OpenFailureException(); }
+    if (dir == nullptr) {
+        this->_dir = nullptr;
+        throw OpenFailureException();
+    }
     this->_dir = dir;
     this->_showHiddenFiles = hidden;
     return true;
