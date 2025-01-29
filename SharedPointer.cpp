@@ -26,6 +26,12 @@ SharedPointer::SharedPointer(const SharedPointer& sp)
     *this->_count += 1;
 }
 
+SharedPointer::~SharedPointer()
+{
+    delete this->_object;
+    *this->_count -= 1;
+}
+
 SharedPointer& SharedPointer::operator=(IObject* object)
 {
     *this->_count -= 1;

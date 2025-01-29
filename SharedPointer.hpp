@@ -18,7 +18,7 @@ class SharedPointer
         SharedPointer();
         SharedPointer(IObject* object);
         SharedPointer(const SharedPointer& sp);
-        ~SharedPointer() { delete this->_object; }
+        ~SharedPointer();
 
         SharedPointer& operator=(IObject* object);
         SharedPointer& operator=(const SharedPointer& sp);

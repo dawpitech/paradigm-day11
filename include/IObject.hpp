@@ -24,15 +24,15 @@ class TestObject final : public IObject
         explicit TestObject(std::string name)
         {
             this->_name = name;
-            std::cout << this->_name  << " is alive." << std::endl;
+            std::cout << this->_name  << " is alive" << std::endl;
         }
         ~TestObject() override
         {
-            std::cout << this->_name << " is dead." << std::endl;
+            std::cout << this->_name << " is dead" << std::endl;
         }
         void touch() override
         {
-            std::cout << this->_name << " is touched." << std::endl;
+            std::cout << this->_name << " is touched" << std::endl;
         }
 
     protected:
