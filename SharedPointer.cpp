@@ -15,7 +15,6 @@ SharedPointer::SharedPointer()
 SharedPointer::SharedPointer(IObject* object)
 {
     this->_object = object;
-    this->_count = new unsigned int;
     *this->_count += 1;
 }
 
@@ -82,8 +81,11 @@ void SharedPointer::reset(IObject* object)
 void SharedPointer::swap(SharedPointer& ptr) noexcept
 {
     const auto ptrObject = ptr._object;
+    const auto ptrCount = ptr._count;
     ptr._object = this->_object;
+    ptr._count = this->_count;
     this->_object = ptrObject;
+    this->_count = ptrCount;
 }
 
 unsigned int SharedPointer::use_count() const
