@@ -33,6 +33,34 @@ class List
         // ReSharper disable once CppClassCanBeFinal
         class InvalidOperationException : std::exception {};
 
+        // ReSharper disable once CppClassCanBeFinal
+        class InvalidIteratorException : std::exception {};
+
+        class Iterator
+        {
+            public:
+                explicit Iterator(const List& list, std::size_t idx = 0);
+                ~Iterator() = default;
+                IObject* operator*() const;
+                Iterator& operator++();
+                bool operator==(const Iterator& it) const;
+                bool operator!=(const Iterator& it) const;
+
+                // ReSharper disable once CppClassCanBeFinal
+                class OutOfRangeException : std::exception {};
+
+                std::size_t getIdx() const { return this->_idx; }
+                bool isOnTheSameList(const List* list) const { return list == &this->_list ? true : false; }
+            protected:
+                const List& _list;
+                std::size_t _idx;
+        };
+
+        Iterator begin() const;
+        Iterator end() const;
+        Iterator erase(Iterator it);
+        Iterator insert(Iterator it, IObject* obj);
+
     protected:
         std::list<IObject*> _list;
 };
