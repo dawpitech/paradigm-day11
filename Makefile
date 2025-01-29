@@ -20,7 +20,9 @@ CPPFLAGS	+=	-iquote .
 BDIR	=	.build/release
 
 SRC	=	bonus/main.cpp
+SRC	+=	IDirectoryLister.cpp
 SRC	+=	DirectoryLister.cpp
+SRC	+=	SafeDirectoryLister.cpp
 
 OBJ = $(SRC:%.cpp=$(BDIR)/%.o)
 
