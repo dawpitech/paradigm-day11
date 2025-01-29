@@ -25,6 +25,7 @@ SRC	+=	IDirectoryLister.cpp
 SRC	+=	DirectoryLister.cpp
 SRC	+=	SafeDirectoryLister.cpp
 SRC	+=	UniquePointer.cpp
+SRC	+=	List.cpp
 
 OBJ = $(SRC:%.cpp=$(BDIR)/%.o)
 
