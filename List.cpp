@@ -44,6 +44,7 @@ void List::popFront()
 {
     if (this->empty())
         throw InvalidOperationException();
+    delete this->_list.front();
     return this->_list.pop_front();
 }
 
@@ -51,6 +52,7 @@ void List::popBack()
 {
     if (this->empty())
         throw InvalidOperationException();
+    delete this->_list.back();
     return this->_list.pop_back();
 }
 
